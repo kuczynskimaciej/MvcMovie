@@ -1,7 +1,6 @@
 ﻿@model MvcMovie.Models.QuestionModel
 <h2>@Model.Question</h2>
-<form>
-    <ul>
+    <ul style="list-style-type:none">
         @{
             foreach (var answer in Model.Answers)
             {
@@ -9,7 +8,6 @@
             }
         }
     </ul>
-</form>
 
 
 @*<div class="row">
