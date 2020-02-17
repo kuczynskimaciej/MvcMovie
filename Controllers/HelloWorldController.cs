@@ -30,7 +30,7 @@ namespace MvcMovie.Controllers
             return View(question);
         }
         [HttpPost]
-        public IActionResult Welcome(QuestionModel question)
+        public IActionResult Welcome([Bind("Question")] QuestionModel question)
         {
             return View();
         }
