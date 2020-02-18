@@ -1,24 +1,55 @@
 ﻿@model MvcMovie.Models.QuestionModel
-<h2>@Model.Question</h2>
-    <ul style="list-style-type:none">
+<style>
+    #h01 {
+        text-align: center;
+        background-color: gray;
+        color: white;
+    }
+
+    #li01 {
+        border: 2px solid tomato;
+        padding: 30px;
+    }
+</style>
+
+<h1 id="h01">
+    @Model.Question
+</h1>
+
+<body>
+    <form method="post">
         @{
+            var countOfCorrectAnswers = Model.Answers.Where(x => x.IsCorrect).Count();
             foreach (var answer in Model.Answers)
             {
-                <li><input type="checkbox" /> @answer.Answer</li>
+                if (countOfCorrectAnswers == 1)
+                {
+                    <input type="radio" asp-for="@answer.Answer" value="@answer.SelectedAnswers" /> @answer.Answer
+                    <br />
+                }
+                else
+                {
+                    <ul style="list-style-type:none">
+                        <li id="li01"><input type="checkbox" /> @answer.Answer</li>
+                    </ul>
+                }
             }
         }
-    </ul>
+        <input type="submit" value="Wybierz" />
+    </form>
+</body>
+
 
 
 @*<div class="row">
         <div class="col-md-4">
             <form asp-action="Welcome" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="Mo" class="text-danger"></div>
 
                 <div class="form-group">
-                    <label asp-for="Question" class="control-label"></label>
-                    <input asp-for="Question" class="form-control" />
-                    <span asp-validation-for="Question" class="text-danger"></span>
+                    <label asp-for="\MvcMovi" class="control-label"></label>
+                    <input asp-for="\MvcMovi" class="form-control" />
+                    <span asp-validation-for="\MvcMovi" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
