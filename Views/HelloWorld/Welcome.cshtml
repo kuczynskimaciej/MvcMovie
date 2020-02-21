@@ -13,25 +13,22 @@
 </style>
 
 <h1 id="h01">
-    @Model.Question
+    @Model.
 </h1>
 
 <body>
     <form method="post">
-        @{
+        @{ 
             var countOfCorrectAnswers = Model.Answers.Where(x => x.IsCorrect).Count();
             foreach (var answer in Model.Answers)
             {
                 if (countOfCorrectAnswers == 1)
                 {
-                    <input type="radio" asp-for="@answer.Answer" value="@answer.SelectedAnswers" /> @answer.Answer
-                    <br />
+                    <input type="radio" asp-for="@answer.Answer" value="@answer.SelectedAnswers" /> @answer.Answer <br/>
                 }
                 else
                 {
-                    <ul style="list-style-type:none">
-                        <li id="li01"><input type="checkbox" /> @answer.Answer</li>
-                    </ul>
+                        <input type="checkbox" value="@answer.Answer"/> @answer.Answer <br/>
                 }
             }
         }

@@ -19,15 +19,27 @@ namespace MvcMovie.Controllers
 
         public IActionResult Welcome()
         {
-            QuestionModel question = new QuestionModel();
-            question.Question = "Ile to jest 2+2?";
-            question.Answers = new List<AnswerModel>();
-            question.Answers.Add(new AnswerModel() { Answer = "1", IsCorrect = false });
-            question.Answers.Add(new AnswerModel() { Answer = "2", IsCorrect = false });
-            question.Answers.Add(new AnswerModel() { Answer = "3", IsCorrect = false });
-            question.Answers.Add(new AnswerModel() { Answer = "4", IsCorrect = true });
+            Dictionary<int, QuestionModel> _dictionaryOfQuestions= new Dictionary<int, QuestionModel>();
+            QuestionModel question1 = new QuestionModel();
+            question1.Question = "Ile to jest 2+2?";
+            question1.Answers = new List<AnswerModel>();
+            question1.Answers.Add(new AnswerModel() { Answer = "1", IsCorrect = false });
+            question1.Answers.Add(new AnswerModel() { Answer = "2", IsCorrect = false });
+            question1.Answers.Add(new AnswerModel() { Answer = "3", IsCorrect = true });
+            question1.Answers.Add(new AnswerModel() { Answer = "4", IsCorrect = true });
 
-            return View(question);
+            QuestionModel question2 = new QuestionModel();
+            question2.Question = "Co idzie ze sobą w parze?";
+            question2.Answers = new List<AnswerModel>();
+            question2.Answers.Add(new AnswerModel() { Answer = "Wódka", IsCorrect = false });
+            question2.Answers.Add(new AnswerModel() { Answer = "Zakąska", IsCorrect = false });
+            question2.Answers.Add(new AnswerModel() { Answer = "", IsCorrect = true });
+            question2.Answers.Add(new AnswerModel() { Answer = "4", IsCorrect = true });
+
+            _dictionaryOfQuestions.Add(1, question1);
+            _dictionaryOfQuestions.Add(2, question2);
+
+            return View(_dictionaryOfQuestions.Values);
         }
         [HttpPost]
         public IActionResult Welcome([Bind("Question")] QuestionModel model)
