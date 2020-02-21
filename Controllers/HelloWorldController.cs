@@ -19,7 +19,9 @@ namespace MvcMovie.Controllers
 
         public IActionResult Welcome()
         {
-            Dictionary<int, QuestionModel> _dictionaryOfQuestions= new Dictionary<int, QuestionModel>();
+            Random rnd = new Random();
+
+            List<QuestionModel> _listOfQuestions = new List<QuestionModel>();
             QuestionModel question1 = new QuestionModel();
             question1.Question = "Ile to jest 2+2?";
             question1.Answers = new List<AnswerModel>();
@@ -36,15 +38,36 @@ namespace MvcMovie.Controllers
             question2.Answers.Add(new AnswerModel() { Answer = "3", IsCorrect = false });
             question2.Answers.Add(new AnswerModel() { Answer = "4", IsCorrect = false });
 
-            _dictionaryOfQuestions.Add(1, question1);
-            _dictionaryOfQuestions.Add(2, question2);
+            _listOfQuestions.Add(question1);
+            _listOfQuestions.Add(question2);
 
-            return View(question1);
+            var countOfQuestions = _listOfQuestions.Count();
+            var indexOfRandomQuestion = rnd.Next(countOfQuestions);
+            var question = _listOfQuestions.ElementAt(indexOfRandomQuestion);
+
+            return View(question);
         }
         [HttpPost]
         public IActionResult CheckAnswers(QuestionModel model)
         {
+            return View(model);
+        }
+        public IActionResult AddAnswer()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddAnswer(AnswerModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Welcome");
+            }
+            else
+            {
+                return View(model);
+            }
         }
     }
 }

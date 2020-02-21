@@ -9,10 +9,7 @@ namespace MvcMovie.Models
 {
     public class QuestionModel
     {
-        [Required]
-        [Display(Name ="Pytanie")]
         public string Question { get; set; }
-
         public List<AnswerModel> Answers { get; set; }
     }
 }
