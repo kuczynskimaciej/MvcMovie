@@ -1,41 +1,60 @@
-﻿@model MvcMovie.Models.QuestionModel
-<style>
-    #h01 {
-        text-align: center;
-        background-color: gray;
-        color: white;
-    }
+﻿@model QuestionModel
 
-    #li01 {
-        border: 2px solid tomato;
-        padding: 30px;
-    }
-</style>
-
-<h1 id="h01">
-    @Model.
-</h1>
 
 <body>
-    <form method="post">
-        @{ 
+    <h1>
+        @Model.Question
+    </h1>
+    <form asp-controller="HelloWorld" asp-action="CheckAnswers" method="post">
+        @{
             var countOfCorrectAnswers = Model.Answers.Where(x => x.IsCorrect).Count();
+
+                <div class="form-group">
+                    <label asp-for="Question" class="control-label"></label>
+                    <input asp-for="Question" class="form-control" />
+                    <span asp-validation-for="Question" class="text-danger"></span>
+                </div>
+
             foreach (var answer in Model.Answers)
             {
                 if (countOfCorrectAnswers == 1)
                 {
-                    <input type="radio" asp-for="@answer.Answer" value="@answer.SelectedAnswers" /> @answer.Answer <br/>
+                    <input type="radio" asp-for="@answer.Answer" value="@answer.SelectedAnswers" /> @answer.Answer <br />
                 }
                 else
                 {
-                        <input type="checkbox" value="@answer.Answer"/> @answer.Answer <br/>
+                    <input type="checkbox" value="@answer.Answer" /> @answer.Answer <br />
                 }
             }
+            <input type="submit" value="Wybierz" />
         }
-        <input type="submit" value="Wybierz" />
     </form>
 </body>
 
+
+@*@foreach (var question in Model)
+    {
+        <h1>
+            @question.Value.Question
+        </h1>
+        <form method="post">
+            @{
+                var countOfCorrectAnswers = question.Value.Answers.Where(x => x.IsCorrect).Count();
+                foreach (var answer in question.Value.Answers)
+                {
+                    if (countOfCorrectAnswers == 1)
+                    {
+                        <input type="radio" asp-for="@answer.Answer" value="@answer.SelectedAnswers" /> @answer.Answer <br />
+                    }
+                    else
+                    {
+                        <input type="checkbox" value="@answer.Answer" /> @answer.Answer <br />
+                    }
+                }
+            }
+            <input type="submit" value="Wybierz" />
+        </form>
+    }*@
 
 
 @*<div class="row">

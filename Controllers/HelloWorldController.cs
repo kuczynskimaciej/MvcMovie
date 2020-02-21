@@ -25,24 +25,24 @@ namespace MvcMovie.Controllers
             question1.Answers = new List<AnswerModel>();
             question1.Answers.Add(new AnswerModel() { Answer = "1", IsCorrect = false });
             question1.Answers.Add(new AnswerModel() { Answer = "2", IsCorrect = false });
-            question1.Answers.Add(new AnswerModel() { Answer = "3", IsCorrect = true });
+            question1.Answers.Add(new AnswerModel() { Answer = "3", IsCorrect = false });
             question1.Answers.Add(new AnswerModel() { Answer = "4", IsCorrect = true });
 
             QuestionModel question2 = new QuestionModel();
             question2.Question = "Co idzie ze sobą w parze?";
             question2.Answers = new List<AnswerModel>();
-            question2.Answers.Add(new AnswerModel() { Answer = "Wódka", IsCorrect = false });
-            question2.Answers.Add(new AnswerModel() { Answer = "Zakąska", IsCorrect = false });
-            question2.Answers.Add(new AnswerModel() { Answer = "", IsCorrect = true });
-            question2.Answers.Add(new AnswerModel() { Answer = "4", IsCorrect = true });
+            question2.Answers.Add(new AnswerModel() { Answer = "Wódka", IsCorrect = true });
+            question2.Answers.Add(new AnswerModel() { Answer = "Zakąska", IsCorrect = true });
+            question2.Answers.Add(new AnswerModel() { Answer = "3", IsCorrect = false });
+            question2.Answers.Add(new AnswerModel() { Answer = "4", IsCorrect = false });
 
             _dictionaryOfQuestions.Add(1, question1);
             _dictionaryOfQuestions.Add(2, question2);
 
-            return View(_dictionaryOfQuestions.Values);
+            return View(question1);
         }
         [HttpPost]
-        public IActionResult Welcome([Bind("Question")] QuestionModel model)
+        public IActionResult CheckAnswers(QuestionModel model)
         {
             return View();
         }
